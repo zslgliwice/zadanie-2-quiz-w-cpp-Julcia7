@@ -1,54 +1,52 @@
 #include <iostream>
-#include <windows.h>
-#include <cstdlib>
-
+#include <string>
 using namespace std;
 
-string imie;
-string odp;
+// Struktura przechowująca pytanie, odpowiedzi i poprawną odpowiedź
+struct Question {
+    string text;
+    string options[3];
+    char correctAnswer;
+};
 
-int main()
-{
-    //https://cpp0x.pl/kursy/Kurs-WinAPI-C++/Roznosci/Kolory-w-konsoli/374
-    HANDLE uchwyt = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(uchwyt, 12);
-    cout << "\aPodaj imie: ";
-    cin >> imie;
-    int pkt = 0;
-
-    system("cls");
-    cout<< "3";
-    Sleep(1000);
-    system("cls");
-    cout<< "3..2";
-    Sleep(1000);
-    system("cls");
-    cout<< "3..2..1..";
-    Sleep(1000);
-    system("cls");
-
-    cout << imie << " witaj w tescie z programowania\n";
-
-    cout << "Co to jest C++?"<<endl;
-    cout << "a) Piosenkarka"<<endl;
-    cout << "b) Jezyk programowania"<<endl;
-    cout << "c) Mlynek do herbaty"<<endl;
-    cout << "Twoja odpowiedz: ";
-    cin >> odp;
-    if(odp == "b")
-    {
-        cout << "Poprawna odpowiedz!";
-        pkt++;
+// Funkcja do zadawania i oceniania pytań
+int askQuestion(const Question& question) {
+    cout << question.text << endl;
+    for (int i = 0; i < 3; i++) {
+        cout << char('a' + i) << ") " << question.options[i] << endl;
     }
-    else
-    {
-        cout << "Zle! Jest to jezyk programowania!";
 
+    char userAnswer;
+    cout << "Twoja odpowiedz (a, b, c): ";
+    cin >> userAnswer;
+
+    if (userAnswer == question.correctAnswer) {
+        cout << "Poprawna odpowiedz!\n";
+        return 1;
+    } else {
+        cout << "Zla odpowiedz. Poprawna odpowiedz to: " << question.correctAnswer << "\n";
+        return 0;
     }
-    Sleep(3000);
-    system("cls");
+}
 
+int main() {
+    int score = 0;
 
+    cout << "Witaj w quizie! Odpowiedz na 5 pytan (A, B, C)." << endl;
+
+    Question questions[] = {
+        {"Kiedy byl chrzest Polski", {"1453", "966", "1876"}, 'b'},
+        {"Uniwersytet Im.Adama Mickiewicza miesci sie w:", {"Poznaniu", "Gliwicach", "Wroclawiu"}, 'a'},
+        {"Ktora planeta jest najblizej Slonca?", {"Ziemia", "Wenus", "Merkury"}, 'c'},
+        {"Jak w mitologi greckiej nazywal sie bog kowalstwa?", {"Zeus", "Kronos", "Hefajstos"}, 'c'},
+        {"Anemie powoduje niedobor:", {"Witaminy D", "Zelaza", "Magnezu"}, 'b'}
+    };
+
+    for (int i = 0; i < 5; i++) {
+        score += askQuestion(questions[i]);
+    }
+
+    cout << "Twoj wynik to: " << score << " na 5 punktow." << endl;
 
     return 0;
 }
