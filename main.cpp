@@ -32,7 +32,7 @@ int askQuestion(const Question& question) {
 int main() {
     int score = 0;
 
-    cout << "Witaj w quizie! Odpowiedz na 5 pytan (A, B, C)." << endl;
+    cout << "Witaj w quizie! Odpowiedz na 5 pytan (a, b, c)." << endl;
 
     Question questions[] = {
         {"Kiedy byl chrzest Polski", {"1453", "966", "1876"}, 'b'},
