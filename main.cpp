@@ -3,6 +3,7 @@
 using namespace std;
 
 // Struktura przechowująca pytanie, odpowiedzi i poprawną odpowiedź
+// A structure that stores the question, answers, and the correct answer
 struct Question {
     string text;
     string options[3];
@@ -10,6 +11,7 @@ struct Question {
 };
 
 // Funkcja do zadawania i oceniania pytań
+// Function for asking and rating questions
 int askQuestion(const Question& question) {
     cout << question.text << endl;
     for (int i = 0; i < 3; i++) {
